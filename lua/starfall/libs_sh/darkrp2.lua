@@ -673,7 +673,6 @@ if SERVER then
 		sender = getply(sender)
 		if instance.player ~= SF.Superuser and instance.player ~= sender then SF.Throw("may not transfer money from player other than owner", 2) return end
 		if sender:canAfford(amount) then
-			givemoneyBurst:use(instance.player, 1)
 			DarkRP.payPlayer(sender, getply(receiver), amount)
 		else
 			SF.Throw("sender can't afford to pay "..DarkRP.formatMoney(amount), 2)
@@ -710,7 +709,6 @@ if SERVER then
 		end
 
 		if manager:exists(sender, receiver) then SF.Throw("You already have a pending request for this sender", 2) end
-		moneyrequestBurst:use(instance.player, 1)
 		manager:add(sender, receiver, amount, message, instance, callbackSuccess, callbackFailure)
 	end
 
@@ -949,7 +947,6 @@ if SERVER then
 		if amount <= 0 then SF.Throw("amount must be positive", 2) return end
 		checkpermission(instance, nil, "darkrp.giveMoney")
 		if instance.player:canAfford(amount) then
-			givemoneyBurst:use(instance.player, 1)
 			DarkRP.payPlayer(instance.player, getply(self), amount)
 		else
 			SF.Throw("you can't afford to pay "..DarkRP.formatMoney(amount), 2)

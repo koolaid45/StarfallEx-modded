@@ -11,7 +11,7 @@ registerprivilege("prop.createCustom", "Create custom prop", "Allows the user to
 
 
 local entList = SF.EntManager("props", "props", -1, "The number of props allowed to spawn via Starfall")
-local plyPropBurst = SF.BurstObject("props", "props", 4, 4, "Rate props can be spawned per second.", "Number of props that can be spawned in a short time.")
+local plyPropBurst = SF.BurstObject("props", "props", 4, 4, "Rate props can be spawned per second.", "Number of props that can be spawned in a short time. (useless now)")
 
 local maxCustomSize = CreateConVar("sf_props_custom_maxsize", "2048", FCVAR_ARCHIVE, "The max hull size of a custom prop")
 local minVertexDistance = CreateConVar("sf_props_custom_minvertexdistance", "0.2", FCVAR_ARCHIVE, "The min distance between two vertices in a custom prop")
