@@ -62,7 +62,6 @@ function props_library.create(pos, ang, model, frozen)
 	local ply = instance.player
 	model = SF.CheckModel(model, ply, true)
 
-	plyPropBurst:use(ply, 1)
 	entList:checkuse(ply, 1)
 	if ply ~= SF.Superuser and gamemode.Call("PlayerSpawnProp", ply, model)==false then SF.Throw("Another hook prevented the prop from spawning", 2) end
 
@@ -112,7 +111,6 @@ function props_library.createRagdoll(model, frozen)
 	model = SF.CheckRagdoll(model, ply)
 	if not model then SF.Throw("Invalid model", 2) end
 
-	plyPropBurst:use(ply, 1)
 	entList:checkuse(ply, 1)
 	if ply ~= SF.Superuser and gamemode.Call("PlayerSpawnRagdoll", ply, model)==false then SF.Throw("Another hook prevented the ragdoll from spawning", 2) end
 
@@ -164,7 +162,6 @@ function props_library.createCustom(pos, ang, vertices, frozen)
 
 	local ply = instance.player
 
-	plyPropBurst:use(ply, 1)
 	entList:checkuse(ply, 1)
 	if instance.player ~= SF.Superuser and gamemode.Call("PlayerSpawnProp", ply, "starfall_prop")==false then SF.Throw("Another hook prevented the prop from spawning", 2) end
 
@@ -273,7 +270,6 @@ function props_library.createComponent(pos, ang, class, model, frozen)
 
 	if ply ~= SF.Superuser then
 		if not ply:CheckLimit("starfall_components") then SF.Throw("Limit of components reached!", 2) end
-		plyPropBurst:use(ply, 1)
 		entList:checkuse(ply, 1)
 		if gamemode.Call("PlayerSpawnSENT", ply, class)==false then SF.Throw("Another hook prevented the component from spawning", 2) end
 	end
@@ -362,7 +358,6 @@ function props_library.createSeat(pos, ang, model, frozen)
 	local ply = instance.player
 	model = SF.CheckModel(model, ply, true)
 
-	plyPropBurst:use(ply, 1)
 	entList:checkuse(ply, 1)
 
 	local class = "prop_vehicle_prisoner_pod"
@@ -420,7 +415,6 @@ function props_library.createSent(pos, ang, class, frozen, data)
 	local ang = aunwrap(ang)
 
 	local ply = instance.player
-	plyPropBurst:use(ply, 1)
 	entList:checkuse(ply, 1)
 
 	local swep = list.GetForEdit("Weapon")[class]
@@ -679,7 +673,7 @@ end
 -- @return boolean True if user can spawn props, False if not.
 function props_library.canSpawn()
 	if not SF.Permissions.hasAccess(instance, nil, "prop.create") then return false end
-	return entList:check(instance.player) > 0 and plyPropBurst:check(instance.player) >= 1
+	return entList:check(instance.player) > 0 
 end
 
 --- Checks how many props can be spawned
@@ -687,14 +681,14 @@ end
 -- @return number Number of props able to be spawned
 function props_library.propsLeft()
 	if not SF.Permissions.hasAccess(instance,  nil, "prop.create") then return 0 end
-	return math.min(entList:check(instance.player), plyPropBurst:check(instance.player))
+	return 6942069420
 end
 
 --- Returns how many props per second the user can spawn
 -- @server
--- @return number Number of props per second the user can spawn
+-- @return string Number of props per second the user can spawn
 function props_library.spawnRate()
-	return plyPropBurst.rate
+	return "good question"
 end
 
 --- Sets whether the chip should remove created props when the chip is removed
